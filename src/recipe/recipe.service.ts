@@ -9,7 +9,14 @@ export class RecipeService {
 constructor(private readonly prisma:PrismaService){}
 
   create(createRecipeDto: CreateRecipeDto) {
-    return 'This action adds a new recipe';
+    return this.prisma.recipe.create({data:
+      {
+        title:createRecipeDto.title,
+        description:createRecipeDto.description,
+      ingeridents:createRecipeDto.ingeridents,
+        instructions:createRecipeDto.instructions
+      }
+    });
   }
 
   findAll() {

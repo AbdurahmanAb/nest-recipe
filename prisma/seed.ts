@@ -10,11 +10,13 @@ async function main() {
   const recipe1 = await prisma.recipe.createMany({
     data:[
       {
+      
         title: 'Spaghetti Bolognese',
         description: 'A classic Italian dish',
         ingeridents:   'Spaghetti, minced beef, tomato sauce, onions, garlic, olive oil, salt, pepper',
         instructions:
-          '1. Cook the spaghetti. 2. Fry the minced beef. 3.  Add the tomato sauce to the beef 4. Serve the spaghetti with the sauce.'
+          '1. Cook the spaghetti. 2. Fry the minced beef. 3.  Add the tomato sauce to the beef 4. Serve the spaghetti with the sauce.',
+          
       },
       {
         title: 'Chicken Curry',

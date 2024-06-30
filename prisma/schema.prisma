@@ -20,23 +20,34 @@ model User {
   name String
   phoneNumber String 
   password String 
-
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model recipe{
+model Recipe{
   Id Int @id @default(autoincrement())
   title String
-  description String 
+  RecipeComment RecipeComment[] 
+  description String? 
   instructions String
   ingeridents String 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
 }
-model comment{
+model Comment{
   id Int @id @default(autoincrement())
   comment String
+  RecipeComment RecipeComment[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- 
-}
+ }
+
+ model RecipeComment{
+  recipeId Int
+  recipe Recipe @relation(fields: [recipeId], references: [Id], onDelete: Cascade, onUpdate: Cascade)
+  commentId Int
+  comment Comment @relation(fields: [commentId], references: [id], onDelete: Cascade, onUpdate: Cascade) 
+  @@id([recipeId, commentId])
+ } 
