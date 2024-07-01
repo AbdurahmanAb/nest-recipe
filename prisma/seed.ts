@@ -7,8 +7,8 @@ const prisma = new PrismaClient(
 
 async function main() {
   // create two dummy recipes
-  const recipe1 = await prisma.recipe.createMany({
-    data:[
+  const recipe1 = await prisma.recipe.create({
+    data:
       {
       
         title: 'Spaghetti Bolognese',
@@ -16,22 +16,51 @@ async function main() {
         ingeridents:   'Spaghetti, minced beef, tomato sauce, onions, garlic, olive oil, salt, pepper',
         instructions:
           '1. Cook the spaghetti. 2. Fry the minced beef. 3.  Add the tomato sauce to the beef 4. Serve the spaghetti with the sauce.',
+        RecipeComment: {
+  create:{
+    comment:{
+      create:{
+        comment:'This is a delicious recipe',
+       
+      }
+    
+    }
+  }
+        }  
           
       },
-      {
-        title: 'Chicken Curry',
-        description: 'A spicy Indian dish',
-        ingeridents:'Chicken, curry powder, onions, garlic, coconut milk, olive oil, salt, pepper',
-        instructions:
-          '1. Fry the chicken. 2. Add the curry powder to the chicken. 3. Add the coconut milk. 4. Serve the curry with rice.'
-      }
-    ]
+     
  
   });
 
+  const recipe2 = await prisma.recipe.create({
+    data:
+      {
+      
+        title: 'Enjera FrFr',
+        description: 'A classic Italian dish',
+        ingeridents:   'Spaghetti, minced beef, tomato sauce, onions, garlic, olive oil, salt, pepper',
+        instructions:
+          '1. Cook the spaghetti. 2. Fry the minced beef. 3.  Add the tomato sauce to the beef 4. Serve the spaghetti with the sauce.',
+        RecipeComment: {
+  create:{
+    comment:{
+      create:{
+        comment:'This is From Related Recipe 2',
+       
+      }
+    
+    }
+  }
+        }  
+          
+      },
+     
+ 
+  });
  
 
-  console.log({ recipe1,  });
+  console.log({ recipe1, recipe2 });
 }
 
 // execute the main function

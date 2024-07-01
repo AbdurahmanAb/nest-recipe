@@ -9,8 +9,8 @@ export class CommentService {
   constructor(private readonly prisma :PrismaService){
 
   }
-  create(createCommentDto: CreateCommentDto) {
-    return this.prisma.comment.create({
+ async create(createCommentDto: CreateCommentDto)  {
+   const comment = await this.prisma.comment.create({
       data:{comment: createCommentDto.comment
 
 
@@ -18,10 +18,39 @@ export class CommentService {
   
     
     });
+
+    const commentRecipe = await this.prisma.recipeComment.create({
+      data:{
+        commentId:comment.id,
+        recipeId:createCommentDto.recipeId
+      }
+    
+    })
+    return this.prisma.comment.findUnique({where:{id:comment.id,
+
+      
+    },
+  include:{
+    RecipeComment:{
+      include:{
+        recipe:true
+      }
+    }
+  }
+  
+  })
   }
 
   findAll() {
-    return this.prisma.comment.findMany();
+    return this.prisma.comment.findMany({
+      include:{
+        RecipeComment:{
+          include:{
+            recipe:true
+          }
+        }
+      }
+    });
   }
 
   findOne(id: number) {

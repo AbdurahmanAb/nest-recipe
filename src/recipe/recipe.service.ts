@@ -20,7 +20,18 @@ constructor(private readonly prisma:PrismaService){}
   }
 
   findAll() {
-    return this.prisma.recipe.findMany();
+    return this.prisma.recipe.findMany(
+     {
+      include:{
+        RecipeComment:{
+          include:{
+            comment:true
+          }
+        }
+       
+      }
+     }
+    );
   }
 
   findOne(id: number) {
