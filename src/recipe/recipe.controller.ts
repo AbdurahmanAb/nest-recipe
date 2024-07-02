@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
 import { RecipeService } from './recipe.service';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
+import { Request } from 'express';
+
 
 @Controller('recipe')
 export class RecipeController {
@@ -14,7 +16,10 @@ export class RecipeController {
   }
 
   @Get()
-  async findAll() {
+  
+  async findAll(req:Request)
+   {
+   
     return await this.recipeService.findAll();
   }
 

@@ -1,10 +1,13 @@
-import { IsEmail, IsPhoneNumber, IsString } from "class-validator";
+import { Role } from "@prisma/client";
+import { IsEmail, IsEnum, IsPhoneNumber, IsString } from "class-validator";
 
 export class CreateUserDto {
 
     @IsString()
     name:string
-
+     
+  
+    role:Role
     @IsEmail()
     email:string
 

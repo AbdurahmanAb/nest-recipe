@@ -6,11 +6,20 @@ import { PrismaModule } from './prisma/prisma.module';
 import { RecipeModule } from './recipe/recipe.module';
 import { CommentModule } from './comment/comment.module';
 import { UserModule } from './user/user.module';
+import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/auth.guard';
+// import { AuthGuard } from './auth/auth.guard';
 
 @Module({
-  imports: [ConfigModule.forRoot(), PrismaModule, RecipeModule, CommentModule, UserModule, AuthModule],
+  imports: [ConfigModule.forRoot(), PrismaModule, RecipeModule, CommentModule, UserModule, AuthModule,JwtModule ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,
+    {
+    provide:APP_GUARD,
+    useClass:AuthGuard
+    }
+  ],
 })
 export class AppModule {}
