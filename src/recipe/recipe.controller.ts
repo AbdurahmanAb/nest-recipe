@@ -3,6 +3,8 @@ import { RecipeService } from './recipe.service';
 import { CreateRecipeDto } from './dto/create-recipe.dto';
 import { UpdateRecipeDto } from './dto/update-recipe.dto';
 import { Request } from 'express';
+import { Roles } from 'src/utils/decorators';
+import { ROLE } from 'src/utils/role-enum';
 
 
 @Controller('recipe')
@@ -16,7 +18,7 @@ export class RecipeController {
   }
 
   @Get()
-  
+  @Roles(ROLE.USER)
   async findAll(req:Request)
    {
    
